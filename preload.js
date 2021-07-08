@@ -14,8 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('#get_devices').addEventListener('click', getDevices);
-  document.querySelector('#get_devices').addEventListener('click', getDevices);
+  document.querySelector('#get-devices').addEventListener('click', getDevices);
 });
 
 function getDevices() {
@@ -32,5 +31,24 @@ function getDevices() {
     }
     console.log("data 33", data);
     document.querySelector("#result").innerText = data;
+    document.querySelector("#log-console").innerText += data;
+    saveDevices(data);
   });
+}
+
+var devices = [];
+function saveDevices(sss) {
+  var ks = sss.split(/\r?\n/);
+  ks.forEach((element, index, arr) => {
+    if (index >= 1 && element) {
+      devices.push(element);
+    }
+  });
+  console.log(devices);
+}
+
+function printLogs(sss) {
+  var ks = sss.split(/\r?\n/);
+  console.log(ks);
+  console.log(ks[0]);
 }
