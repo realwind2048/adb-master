@@ -5,6 +5,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <title>Hello World!</title>
   </head>
   <body>
@@ -15,7 +16,8 @@
     <div>
       <input type="button" id="get-devices" value="Get Devices"/>
       <div>
-        result: <span id="result"></span>.  
+        device list: <br>
+        <span id="result"></span>.  
       </div>
       <div id="log-console">
         
