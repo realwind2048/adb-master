@@ -5,7 +5,7 @@ const fixPath = require("fix-path")
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
+    const replaceText = (selector: string, text: string) => {
       const element = document.getElementById(selector)
       if (element) element.innerText = text
     }
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function getDevices() {
   console.log("getDevices");
   const { exec } = require("child_process");
-  exec("adb devices -l", (error, data, getter) => {
+  exec("adb devices -l", (error: any, data: any, getter: any) => {
     if (error) {
       console.log("error  22", error);
       return;
@@ -34,15 +34,15 @@ function getDevices() {
       return;
     }
     console.log("data 33", data);
-    document.querySelector("#log-console").innerText += data;
+    document.querySelector("#log-console").innerHTML += data;
     saveDevices(data);
   });
 }
 
-var devices = [];
-function saveDevices(sss) {
+var devices: Array<Device> = [];
+function saveDevices(sss: string) {
   var ks = sss.split(/\r?\n/);
-  ks.forEach((element, index) => {
+  ks.forEach((element: any, index: number) => {
     if (index >= 1 && element) {
       devices.push(parseDevice(element));
     }
@@ -57,17 +57,17 @@ function saveDevices(sss) {
   })
 }
 
-function printLogs(sss) {
+function printLogs(sss: string) {
   var ks = sss.split(/\r?\n/);
   console.log(ks);
   console.log(ks[0]);
 }
 
-function parseDevice(deviceString) {
-  var ls = deviceString.split(" ");
-  var device = new Device();
-  var index = 0;
-  ls.forEach((element) => {
+function parseDevice(deviceString: string): Device {
+  let ls = deviceString.split(" ");
+  let device = new Device();
+  let index = 0;
+  ls.forEach((element: string) => {
     if (element) {
       if (index == 0) {
         device.id = element;
@@ -82,12 +82,21 @@ function parseDevice(deviceString) {
   return device;
 }
 
-const Device = class {
-  constructor(id, model) {
-    this.id = id;
-    this.model = model;
-  }
+class Device {
+  id: string;
+  model: string;
+  
   json() {
     return `${this.id} ${this.model}`;
   }
 };
+
+// const Device = class {
+//   constructor(id, model) {
+//     this.id = id;
+//     this.model = model;
+//   }
+//   json() {
+//     return `${this.id} ${this.model}`;
+//   }
+// };
