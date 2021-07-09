@@ -42,6 +42,7 @@ function getDevices() {
 var devices: Array<Device> = [];
 function saveDevices(sss: string) {
   var ks = sss.split(/\r?\n/);
+  devices = [];
   ks.forEach((element: any, index: number) => {
     if (index >= 1 && element) {
       devices.push(parseDevice(element));
@@ -50,6 +51,9 @@ function saveDevices(sss: string) {
   console.log(devices);
   // document.querySelector("#result").innerText = devices[0];
   var list = document.querySelector("#device-list");
+  while (list.firstChild) {
+    list.removeChild(list.lastChild);
+  }
   devices.forEach((e) => {
     var item = document.createElement('li');
     item.innerHTML = e.json();
