@@ -1,17 +1,10 @@
+import { ExecuteUseCase } from "./executeUseCase";
+var executeUseCase = new ExecuteUseCase();
+
 export class DeviceUseCase {
     getDevices() {
         console.log("getDevices");
-        const { exec } = require("child_process");
-        exec("adb devices -l", (error: any, data: any, getter: any) => {
-          if (error) {
-            console.log("error  22", error);
-            return;
-          }
-          if (getter) {
-            console.log("data 22", data);
-            return;
-          }
-          console.log("data 33", data);
+        executeUseCase.execute("adb devices -l", (data) => {
           document.querySelector("#log-console").innerHTML += data;
           this.saveDevices(data);
         });
