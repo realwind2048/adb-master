@@ -23,6 +23,26 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#get-devices').addEventListener('click', getDevices);
 });
 
+// add drag and drop events
+document.addEventListener('drop', (event: DragEvent) => {
+  event.preventDefault();
+  event.stopPropagation();
+  console.log('File Path of dragged files: ', event.dataTransfer.files[0].path)
+});
+
+document.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+});
+
+// document.addEventListener('dragenter', (event) => {
+//   console.log('File is in the Drop Space');
+// });
+
+// document.addEventListener('dragleave', (event) => {
+//   console.log('File has left the Drop Space');
+// });
+
 function getDevices() {
   console.log("getDevices");
   deviceUseCase.getDevices();
