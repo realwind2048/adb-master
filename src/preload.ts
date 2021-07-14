@@ -55,7 +55,8 @@ function saveDevices(sss: string) {
     list.removeChild(list.lastChild);
   }
   devices.forEach((e) => {
-    var item = document.createElement('li');
+    var item = document.createElement('option');
+    item.value = e.id;
     item.innerHTML = e.json();
     list.appendChild(item);
   })
