@@ -1,8 +1,9 @@
 // preload.js
 import { DeviceUseCase } from "./usecase/deviceUseCase.js";
-
+import { InstallUseCase } from "./usecase/installUseCase.js";
 const fixPath = require("fix-path")
 const deviceUseCase = new DeviceUseCase(); 
+const installUseCase = new InstallUseCase();
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -28,6 +29,7 @@ document.addEventListener('drop', (event: DragEvent) => {
   event.preventDefault();
   event.stopPropagation();
   console.log('File Path of dragged files: ', event.dataTransfer.files[0].path)
+  installUseCase.install("aaaa", "/path/");
 });
 
 document.addEventListener('dragover', (e) => {

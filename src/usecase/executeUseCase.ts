@@ -1,7 +1,7 @@
 const { exec } = require("child_process");
 export class ExecuteUseCase {
     execute(command: string, callback: (data: any) => void) {
-        exec("adb devices -l", (error: any, data: any, getter: any) => {
+        exec(command, (error: any, data: any, getter: any) => {
             if (error) {
               console.log("error  22", error);
               return;
