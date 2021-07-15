@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Hello World!</title>
   </head>
   <body>
@@ -18,12 +19,12 @@
       <div>
         device list: <br>
         <span id="result"></span>
-        <select id="device-list" onChange="onDeviceSelected(this);" name="color3" size="1">
+        <select id="device-list" name="color3" size="1">
         </select>
       </div>
       <br>
-      <div id="log-console" class="container bg-dark text-white">
-        
+      <div id="log-console-container" class="container bg-dark text-white">
+        <p id="log-console" class="allow-new-line"></p>
       </div>
     </div>
   </body>
