@@ -28,8 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('drop', (event: DragEvent) => {
   event.preventDefault();
   event.stopPropagation();
-  console.log('File Path of dragged files: ', event.dataTransfer.files[0].path)
-  installUseCase.install("aaaa", "/path/");
+  let filepath = event.dataTransfer.files[0].path
+  console.log('File Path of dragged files: ', filepath)
+
+  var sel = document.getElementById("device-list") as HTMLSelectElement;
+  var text= sel.options[sel.selectedIndex].value;
+  installUseCase.install(text, filepath);
 });
 
 document.addEventListener('dragover', (e) => {
