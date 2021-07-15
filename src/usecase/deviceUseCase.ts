@@ -5,7 +5,6 @@ export class DeviceUseCase {
     getDevices() {
         console.log("getDevices");
         executeUseCase.execute("adb devices -l", (data) => {
-          document.querySelector("#log-console").innerHTML += data;
           this.saveDevices(data);
         });
       }
