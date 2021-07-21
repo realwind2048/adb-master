@@ -9,7 +9,9 @@ export class LogUseCase {
         })
     }
     dump(device: string) {
-        const command = `adb -s ${device} logcat -d > log.txt`
+        var today = new Date();
+        var dateTime = today.toISOString();
+        const command = `adb -s ${device} logcat -d > log-${device}-${dateTime}.txt`
         executeUseCase.execute(command, (data) => {
             console.log(data);
         })
