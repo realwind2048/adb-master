@@ -15,6 +15,8 @@ export class ExecuteUseCase {
             }
             console.log("data: ", data);
             document.querySelector("#log-console").innerHTML += data;
+            var textarea = document.getElementById('log-console');
+            textarea.scrollTop = textarea.scrollHeight;
             callback(data);
           });
     }

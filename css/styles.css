@@ -2,6 +2,10 @@
     white-space:pre-wrap;
 }
 
+#log-console {
+    width: 100%;
+}
+
 .hide {
     display: none;
 }
