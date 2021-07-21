@@ -1,9 +1,11 @@
 // preload.js
 import { DeviceUseCase } from "./usecase/deviceUseCase.js";
 import { InstallUseCase } from "./usecase/installUseCase.js";
+import { LogUseCase } from "./usecase/logUseCase.js";
 const fixPath = require("fix-path")
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
+const logUseCase = new LogUseCase();
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -22,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#get-devices').addEventListener('click', getDevices);
+  document.querySelector('#dump-log').addEventListener('click', dumpLog);
 });
 
 // add drag and drop events
@@ -52,4 +55,11 @@ document.addEventListener('dragover', (e) => {
 function getDevices() {
   console.log("getDevices");
   deviceUseCase.getDevices();
+}
+
+function dumpLog() {
+  console.log("dumpLog");
+  var sel = document.getElementById("device-list") as HTMLSelectElement;
+  var text= sel.options[sel.selectedIndex].value;
+  logUseCase.dump(text);
 }
