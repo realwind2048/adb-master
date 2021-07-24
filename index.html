@@ -33,12 +33,27 @@
         </li>
       </ul>
       <br>
-      <div id="drag-and-drop-container" class="hide">
-        <h3>Drag and Drop: Install APK</h1>
-      </div>
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane active" id="apk" role="tabpanel" aria-labelledby="apk-tab">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check-reinstall">
+            <label class="form-check-label" for="check-reinstall">-r: Reinstall</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check-test">
+            <label class="form-check-label" for="check-test">-t: test</label>
+          </div>
+          <br>
+          <p>
+            command sample: 
+            <span class="bg-dark text-white" id="example-adb-install-command">
+              adb install 
+              <span id="adb-install-command-option-r">-r </span>
+              <span id="adb-install-command-option-t">-t </span>
+              sample.apk
+            </span>
+          </p>
           <br>
         </div>
         <div class="tab-pane" id="log" role="tabpanel" aria-labelledby="log-tab">
@@ -51,6 +66,10 @@
         <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
           <br>
         </div>
+      </div>
+      <br>
+      <div id="drag-and-drop-container" class="hide">
+        <h3>Drag and Drop: Install APK</h1>
       </div>
       <br>
       <div id="log-console-container" class="container bg-dark text-white">

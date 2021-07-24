@@ -5,8 +5,10 @@
 // Use preload.js to selectively enable features
 // needed in the renderer process.
 
-const bootstrap = require('bootstrap')
+const bootstrap = require('bootstrap');
+const $ = require('jquery');
 
+// bootstrap tab
 var triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
 triggerTabList.forEach(function (triggerEl: { addEventListener: (arg0: string, arg1: (event: any) => void) => void }) {
   var tabTrigger = new bootstrap.Tab(triggerEl)
@@ -16,3 +18,25 @@ triggerTabList.forEach(function (triggerEl: { addEventListener: (arg0: string, a
     tabTrigger.show()
   })
 })
+
+// adb install command option checkbox
+$('#check-reinstall').change(function() {
+  setCheck($('#adb-install-command-option-r'), $(this).prop('checked'))
+})
+$('#check-test').change(function() {
+  setCheck($('#adb-install-command-option-t'), $(this).prop('checked'))
+})
+
+function setCheck(checkbox: Element, bool: Boolean) {
+  if (bool) {
+    checkbox.show();
+  } else {
+    checkbox.hide();
+  }
+}
+
+$('#check-reinstall').prop('checked', true);
+$('#adb-install-command-option-r').show();
+$('#check-test').prop('checked', false);
+$('#adb-install-command-option-t').hide();
+
