@@ -29,6 +29,7 @@
   "dependencies": {
     "bootstrap": "^5.0.2",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-tabs": "^0.15.0",
     "fix-path": "^3.0.0"
   },
   "config": {
