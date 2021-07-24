@@ -36,20 +36,25 @@
           <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
         </li>
       </ul>
-
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div class="tab-pane active" id="apk" role="tabpanel" aria-labelledby="apk-tab">1</div>
-        <div class="tab-pane" id="log" role="tabpanel" aria-labelledby="log-tab">2</div>
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">3</div>
-        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">4</div>
-      </div>
-      
-      <br>
-      <input type="button" id="dump-log" class="btn btn-primary" value="dump Log"/>
       <br>
       <div id="drag-and-drop-container" class="hide">
         <h3>Drag and Drop: Install APK</h1>
+      </div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="apk" role="tabpanel" aria-labelledby="apk-tab">
+          <br>
+        </div>
+        <div class="tab-pane" id="log" role="tabpanel" aria-labelledby="log-tab">
+          <br>
+          <input type="button" id="dump-log" class="btn btn-primary" value="dump Log"/>
+        </div>
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+          <br>
+        </div>
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+          <br>
+        </div>
       </div>
       <br>
       <div id="log-console-container" class="container bg-dark text-white">
@@ -57,7 +62,6 @@
         </textarea>
       </div>
     </div>
-    <button onclick="reqDevice()">request Device List!</button>
     <script src="./dist/renderer.js"></script>
   </body>
 </html>
