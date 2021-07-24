@@ -4,7 +4,6 @@
 // nodeIntegration is set to true in webPreferences.
 // Use preload.js to selectively enable features
 // needed in the renderer process.
-
 const bootstrap = require('bootstrap');
 const $ = require('jquery');
 
@@ -24,10 +23,12 @@ $('#check-reinstall').change(function() {
   setCheck($('#adb-install-command-option-r'), $(this).prop('checked'))
 })
 $('#check-test').change(function() {
+  console.log($.type($('#check-test')));
   setCheck($('#adb-install-command-option-t'), $(this).prop('checked'))
 })
 
-function setCheck(checkbox: Element, bool: Boolean) {
+function setCheck(checkbox: object, bool: Boolean) {
+  console.log($.type(checkbox))
   if (bool) {
     checkbox.show();
   } else {
