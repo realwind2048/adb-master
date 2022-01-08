@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getDevices() {
   console.log("getDevices");
+  console.log("getDevices process.platform = " + process.platform);
   deviceUseCase.getDevices();
 }
 
@@ -58,7 +59,7 @@ function dumpLog() {
   logUseCase.dump(text);
 }
 
-function dropHandler(ev) {
+function dropHandler(ev: any) {
   console.log('File(s) dropped');
 
   // Prevent default behavior (Prevent file from being opened)

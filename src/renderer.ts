@@ -27,7 +27,7 @@ $('#check-test').change(function() {
   setCheck($('#adb-install-command-option-t'), $(this).prop('checked'))
 })
 
-function setCheck(checkbox: object, bool: Boolean) {
+function setCheck(checkbox: HTMLFormElement, bool: Boolean) {
   console.log($.type(checkbox))
   if (bool) {
     checkbox.show();
