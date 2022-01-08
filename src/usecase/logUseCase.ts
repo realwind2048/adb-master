@@ -8,10 +8,19 @@ export class LogUseCase {
             console.log(data);
         })
     }
-    dump(device: string) {
+    dump(device: string, os: string) {
         var today = new Date();
         var dateTime = today.toISOString();
-        const command = `adb -s ${device} logcat -d > log-${device}-${dateTime}.txt`
+        let filename = `log-${device}-${dateTime}.txt`;
+        filename = filename.replace(/:/gi, "-");
+        let command = `adb -s ${device} logcat -d > ${filename}`;
+        // TODO optimize
+        if (os == 'win32') {
+            // command = `adb -s ${device} logcat -d | Out-File -FilePath ${filename}`
+            command = `adb -s ${device} logcat -d > ${filename}`;
+        } else {
+            command = `adb -s ${device} logcat -d > ${filename}`
+        }
         executeUseCase.execute(command, (data) => {
             console.log(data);
         })

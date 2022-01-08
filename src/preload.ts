@@ -6,11 +6,13 @@ const fixPath = require("fix-path")
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
 const logUseCase = new LogUseCase();
+var os: string
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
     fixPath();
+    distinguishOS();
     getDevices();
   })
 
@@ -46,9 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
 //   console.log('File has left the Drop Space');
 // });
 
+function distinguishOS() {
+  os = process.platform;
+  console.log("distinguishOS os = " + os);
+}
 function getDevices() {
   console.log("getDevices");
-  console.log("getDevices process.platform = " + process.platform);
   deviceUseCase.getDevices();
 }
 
@@ -56,7 +61,7 @@ function dumpLog() {
   console.log("dumpLog");
   var sel = document.getElementById("device-list") as HTMLSelectElement;
   var text= sel.options[sel.selectedIndex].value;
-  logUseCase.dump(text);
+  logUseCase.dump(text, os);
 }
 
 function dropHandler(ev: any) {
