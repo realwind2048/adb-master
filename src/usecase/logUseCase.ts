@@ -15,6 +15,8 @@ export class LogUseCase {
         filename = filename.replace(/:/gi, "-");
         let command = `adb -s ${device} logcat -d > ${filename}`;
         // TODO optimize
+        // win32 == window
+        // darwin == mac
         if (os == 'win32') {
             // command = `adb -s ${device} logcat -d | Out-File -FilePath ${filename}`
             command = `adb -s ${device} logcat -d > ${filename}`;
