@@ -2,12 +2,10 @@
 import { DeviceUseCase } from "./usecase/deviceUseCase.js";
 import { InstallUseCase } from "./usecase/installUseCase.js";
 import { LogUseCase } from "./usecase/logUseCase.js";
-const { shell } = require('electron') // deconstructing assignment
 const fixPath = require("fix-path")
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
 const logUseCase = new LogUseCase();
-const electron = require('electron')
 var os: string
 
 // All of the Node.js APIs are available in the preload process.
@@ -69,8 +67,7 @@ function dumpLog() {
 
 function openLogLocation() {
   console.log("openLogLocation");
-  // shell.showItemInFolder('/Users/kimbruce/Documents/git/adb-master') // Show the given file in a file manager. If possible, select the file.
-  shell.openPath(electron.remote.app.getAppPath()) // Open the given file in the desktop's default manner.
+  logUseCase.openLogPath();
 }
 
 function dropHandler(ev: any) {
