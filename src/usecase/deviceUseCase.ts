@@ -48,9 +48,6 @@ export class DeviceUseCase {
         item.innerHTML = e.json();
         list.appendChild(item);
       })
-      if (devices.length > 0) {
-        (document.querySelector('#drag-and-drop-container') as HTMLElement).style.display = "block";
-      }
     }
 
 }
