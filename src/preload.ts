@@ -2,10 +2,12 @@
 import { DeviceUseCase } from "./usecase/deviceUseCase.js";
 import { InstallUseCase } from "./usecase/installUseCase.js";
 import { LogUseCase } from "./usecase/logUseCase.js";
+const { shell } = require('electron') // deconstructing assignment
 const fixPath = require("fix-path")
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
 const logUseCase = new LogUseCase();
+const electron = require('electron')
 var os: string
 
 // All of the Node.js APIs are available in the preload process.
@@ -19,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#get-devices').addEventListener('click', getDevices);
   document.querySelector('#dump-log').addEventListener('click', dumpLog);
+  document.querySelector('#open-log-location').addEventListener('click', openLogLocation);
   document.querySelector('#adb-install-area').addEventListener('drop', dropHandler, false);
   document.querySelector('#adb-install-area').addEventListener('dragover', dragOverHandler, false);
 });
@@ -62,6 +65,12 @@ function dumpLog() {
   var sel = document.getElementById("device-list") as HTMLSelectElement;
   var text= sel.options[sel.selectedIndex].value;
   logUseCase.dump(text, os);
+}
+
+function openLogLocation() {
+  console.log("openLogLocation");
+  // shell.showItemInFolder('/Users/kimbruce/Documents/git/adb-master') // Show the given file in a file manager. If possible, select the file.
+  shell.openPath(electron.remote.app.getAppPath()) // Open the given file in the desktop's default manner.
 }
 
 function dropHandler(ev: any) {
