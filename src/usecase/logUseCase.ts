@@ -2,7 +2,7 @@ const { shell } = require('electron') // deconstructing assignment
 const electron = require('electron')
 import { ExecuteUseCase } from "./executeUseCase";
 let executeUseCase = new ExecuteUseCase();
-let logPath = "./logs/"
+let logPath = `${electron.remote.app.getAppPath()}/logs/`
 export class LogUseCase {
     enable(device: string) {
         const command = `adb -s ${device} logcat`
@@ -44,7 +44,7 @@ export class LogUseCase {
         var fs = require('fs');
         var dir = logPath;
 
-        if (!fs.existsSync(dir)){
+        if (!fs.existsSync(dir)) {
             console.log('createLogPath');
             fs.mkdirSync(dir, { recursive: true });
         }
