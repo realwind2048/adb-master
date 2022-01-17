@@ -66,6 +66,19 @@
           <br>
         </div>
         <div class="tab-pane" id="log" role="tabpanel" aria-labelledby="log-tab">
+          -t: Select Log Time
+          <div class="form-check">
+            <input type="radio" name="select-log-time" class="form-check-input" id="check-select-time-all" checked>
+            <label class="form-check-label" for="check-select-time-all">All logs from device buffer</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="select-log-time" class="form-check-input" id="check-select-time-1-hour">
+            <label class="form-check-label" for="check-select-time-1-hour">1 hour</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="select-log-time" class="form-check-input" id="check-select-time-10-minutes">
+            <label class="form-check-label" for="check-select-time-10-minutes">10 minutes</label>
+          </div>
           <br>
           <input type="button" id="dump-log" class="btn btn-primary" value="dump Log"/>
           <input type="button" id="open-log-location" class="btn btn-primary" value="open log location"/>

@@ -62,7 +62,19 @@ function dumpLog() {
   console.log("dumpLog");
   var sel = document.getElementById("device-list") as HTMLSelectElement;
   var text= sel.options[sel.selectedIndex].value;
-  logUseCase.dump(text, os);
+
+  var today = new Date();
+  var logfromTime = "";
+  if ($('#check-select-time-all').prop('checked')) {
+    logfromTime = "";
+  } else if ($('#check-select-time-1-hour').prop('checked')) {
+    var calculatedTime = new Date(today.getTime() - 1 * 60 * 60 * 1000);
+    logfromTime = `'${calculatedTime.getMonth() + 1}-${calculatedTime.getDate()} ${calculatedTime.getHours()}:${calculatedTime.getMinutes()}:${calculatedTime.getSeconds()}.${calculatedTime.getUTCMilliseconds()}'`
+  } else if ($('#check-select-time-10-minutes').prop('checked')) {
+    var calculatedTime = new Date(today.getTime() - 10 * 60 * 1000);
+    logfromTime = `'${calculatedTime.getMonth() + 1}-${calculatedTime.getDate()} ${calculatedTime.getHours()}:${calculatedTime.getMinutes()}:${calculatedTime.getSeconds()}.${calculatedTime.getUTCMilliseconds()}'`
+  }
+  logUseCase.dump(text, os, logfromTime);
 }
 
 function openLogLocation() {
