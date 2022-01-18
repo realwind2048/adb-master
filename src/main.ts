@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+const { dialog, ipcMain } = require('electron')
 
 function createWindow() {
   // Create the browser window.
@@ -19,6 +20,13 @@ function createWindow() {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  ipcMain.on('select-dirs', async (event, arg) => {
+    const result = await dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory']
+    })
+    console.log('directories selected', result.filePaths)
+  })
 }
 
 // This method will be called when Electron has finished

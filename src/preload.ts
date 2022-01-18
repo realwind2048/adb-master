@@ -16,6 +16,16 @@ window.addEventListener('DOMContentLoaded', () => {
     getDevices();
   })
 
+const { ipcRenderer } = require('electron')
+
+process.once('loaded', () => {
+  window.addEventListener('message', evt => {
+    if (evt.data.type === 'select-dirs') {
+      ipcRenderer.send('select-dirs')
+    }
+  })
+})
+
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#get-devices').addEventListener('click', getDevices);
   document.querySelector('#dump-log').addEventListener('click', dumpLog);

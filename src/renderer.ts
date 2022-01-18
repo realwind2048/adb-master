@@ -41,3 +41,10 @@ $('#adb-install-command-option-r').show();
 $('#check-test').prop('checked', false);
 $('#adb-install-command-option-t').hide();
 
+// log path
+document.getElementById('dirs').addEventListener('click', () => {
+  window.postMessage({
+    type: 'select-dirs'
+  }, '*')
+})
+
