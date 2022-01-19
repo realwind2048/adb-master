@@ -68,6 +68,11 @@ function getDevices() {
   deviceUseCase.getDevices();
 }
 
+function getLogPath() {
+  let logPath = $('#log-tab-log-path').text() + "/";
+  console.log("getLogPath3 = " + $('#log-tab-log-path').text());
+  return logPath
+}
 function dumpLog() {
   console.log("dumpLog");
   var sel = document.getElementById("device-list") as HTMLSelectElement;
@@ -84,12 +89,12 @@ function dumpLog() {
     var calculatedTime = new Date(today.getTime() - 10 * 60 * 1000);
     logfromTime = `'${calculatedTime.getMonth() + 1}-${calculatedTime.getDate()} ${calculatedTime.getHours()}:${calculatedTime.getMinutes()}:${calculatedTime.getSeconds()}.${calculatedTime.getUTCMilliseconds()}'`
   }
-  logUseCase.dump(text, os, logfromTime);
+  logUseCase.dump(text, os, logfromTime, getLogPath());
 }
 
 function openLogLocation() {
   console.log("openLogLocation");
-  logUseCase.openLogPath();
+  logUseCase.openLogPath(getLogPath());
 }
 
 function dropHandler(ev: any) {

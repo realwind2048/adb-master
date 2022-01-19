@@ -2,7 +2,6 @@ const { shell } = require('electron') // deconstructing assignment
 const electron = require('electron')
 import { ExecuteUseCase } from "./executeUseCase";
 let executeUseCase = new ExecuteUseCase();
-let logPath = `${electron.remote.app.getAppPath()}/logs/`
 export class LogUseCase {
     enable(device: string) {
         const command = `adb -s ${device} logcat`
@@ -11,8 +10,8 @@ export class LogUseCase {
         })
     }
     // adb -s emulator-5554 logcat -d -t '01-14 23:00:00.000' > 2022-01-15T14-19-55.234Z
-    dump(device: string, os: string, logFromTime: string) {
-        this.createLogPathIfNeeded();
+    dump(device: string, os: string, logFromTime: string, logPath: string) {
+        this.createLogPathIfNeeded(logPath);
         var today = new Date();
         var logTimeOption = "";
         if (logFromTime.length > 0) {
@@ -36,11 +35,11 @@ export class LogUseCase {
             console.log(data);
         })
     }
-    openLogPath() {
-        this.createLogPathIfNeeded();
+    openLogPath(logPath: string) {
+        this.createLogPathIfNeeded(logPath);
         shell.openPath(logPath) // Open the given file in the desktop's default manner.
     }
-    createLogPathIfNeeded() {
+    createLogPathIfNeeded(logPath: string) {
         var fs = require('fs');
         var dir = logPath;
 

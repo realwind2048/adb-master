@@ -6,6 +6,7 @@
 // needed in the renderer process.
 const bootstrap = require('bootstrap');
 const $ = require('jquery');
+const { ipcRenderer } = require('electron')
 
 // bootstrap tab
 var triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
@@ -47,4 +48,9 @@ document.getElementById('dirs').addEventListener('click', () => {
     type: 'select-dirs'
   }, '*')
 })
+
+ipcRenderer.on('directories-selected-message', function (event, message) {
+  console.log(message);
+  $('#log-tab-log-path').text(message[0]);
+});
 

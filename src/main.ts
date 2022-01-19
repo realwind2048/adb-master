@@ -26,6 +26,7 @@ function createWindow() {
       properties: ['openDirectory']
     })
     console.log('directories selected', result.filePaths)
+    mainWindow.webContents.send('directories-selected-message', result.filePaths);
   })
 }
 
