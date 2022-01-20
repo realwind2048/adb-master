@@ -4,6 +4,7 @@ import { InstallUseCase } from "./usecase/installUseCase.js";
 import { LogUseCase } from "./usecase/logUseCase.js";
 const fixPath = require("fix-path")
 const Store = require('electron-store');
+const { dialog } = require('electron')
 const store = new Store();
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
@@ -24,6 +25,9 @@ process.once('loaded', () => {
   window.addEventListener('message', evt => {
     if (evt.data.type === 'select-dirs') {
       ipcRenderer.send('select-dirs')
+    } else if (evt.data.type === 'show-message') {
+      console.log(evt.data);
+      ipcRenderer.send('show-message', evt.data.message);
     }
   })
 })
@@ -86,6 +90,10 @@ function getLogPath() {
 }
 function dumpLog() {
   console.log("dumpLog");
+  if (getLogPath().length < 1) {
+    showDialog("Please set log path first");
+    return;
+  }
   var sel = document.getElementById("device-list") as HTMLSelectElement;
   var text = sel.options[sel.selectedIndex].value;
 
@@ -105,7 +113,18 @@ function dumpLog() {
 
 function openLogLocation() {
   console.log("openLogLocation");
+  if (getLogPath().length < 1) {
+    showDialog("Please set log path first");
+    return;
+  }
   logUseCase.openLogPath(getLogPath());
+}
+
+function showDialog(message: string) {
+  window.postMessage({
+    type: 'show-message',
+    message
+  }, '*');
 }
 
 function dropHandler(ev: any) {

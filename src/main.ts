@@ -29,6 +29,12 @@ function createWindow() {
     console.log('directories selected', result.filePaths)
     mainWindow.webContents.send('directories-selected-message', result.filePaths);
   })
+
+  ipcMain.on('show-message', async (event, arg) => {
+    const result = await dialog.showMessageBox(null, {
+      message: arg
+    });
+  })
 }
 
 // This method will be called when Electron has finished
