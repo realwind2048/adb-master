@@ -4,7 +4,7 @@ import { InstallUseCase } from "./usecase/installUseCase.js";
 import { LogUseCase } from "./usecase/logUseCase.js";
 const fixPath = require("fix-path")
 const Store = require('electron-store');
-const { dialog } = require('electron')
+const { app, dialog } = require('electron')
 const store = new Store();
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
@@ -14,6 +14,7 @@ var os: string
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
+    $('#settings-tab-app-version').text(app.getVersion())
     fixPath();
     distinguishOS();
     getDevices();
@@ -42,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadLogPathFromStore() {
-  var logPath = store.get('log-path');
-  if (logPath.length > 0) {
+  var logPath = store.get('log-path') as string;
+  if (logPath == null || logPath.length > 0) {
     console.log(logPath);
     $('#log-tab-log-path').text(logPath);
   }
@@ -89,8 +90,8 @@ function getLogPath() {
   return logPath
 }
 function dumpLog() {
-  console.log("dumpLog");
-  if (getLogPath().length < 1) {
+  console.log("dumpLog getLogPath().length = " + getLogPath().length);
+  if (getLogPath().length <= 1) {
     showDialog("Please set log path first");
     return;
   }
@@ -113,7 +114,7 @@ function dumpLog() {
 
 function openLogLocation() {
   console.log("openLogLocation");
-  if (getLogPath().length < 1) {
+  if (getLogPath().length <= 1) {
     showDialog("Please set log path first");
     return;
   }
