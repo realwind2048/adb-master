@@ -4,7 +4,6 @@ import { InstallUseCase } from "./usecase/installUseCase.js";
 import { LogUseCase } from "./usecase/logUseCase.js";
 const fixPath = require("fix-path")
 const Store = require('electron-store');
-const { app, dialog } = require('electron')
 const store = new Store();
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
@@ -14,7 +13,6 @@ var os: string
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
-    $('#settings-tab-app-version').text(app.getVersion())
     fixPath();
     distinguishOS();
     getDevices();
