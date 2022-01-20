@@ -24,12 +24,12 @@ export class LogUseCase {
         // TODO optimize
         // win32 == window
         // darwin == mac
-        let command = `adb -s ${device} logcat -d ${logTimeOption}> ${logPath}${filename}`;
+        let command = `adb -s ${device} logcat -d ${logTimeOption}> '${logPath}${filename}'`;
         if (os == 'win32') {
             // command = `adb -s ${device} logcat -d | Out-File -FilePath ${filename}`
-            command = `adb -s ${device} logcat -d ${logTimeOption} > ${logPath}${filename}`;
+            command = `adb -s ${device} logcat -d ${logTimeOption} > '${logPath}${filename}'`;
         } else {
-            command = `adb -s ${device} logcat -d ${logTimeOption} > ${logPath}${filename}`
+            command = `adb -s ${device} logcat -d ${logTimeOption} > '${logPath}${filename}'`
         }
         executeUseCase.execute(command, (data) => {
             console.log(data);
