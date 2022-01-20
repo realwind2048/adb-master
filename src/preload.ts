@@ -3,6 +3,8 @@ import { DeviceUseCase } from "./usecase/deviceUseCase.js";
 import { InstallUseCase } from "./usecase/installUseCase.js";
 import { LogUseCase } from "./usecase/logUseCase.js";
 const fixPath = require("fix-path")
+const Store = require('electron-store');
+const store = new Store();
 const deviceUseCase = new DeviceUseCase(); 
 const installUseCase = new InstallUseCase();
 const logUseCase = new LogUseCase();
@@ -32,7 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#open-log-location').addEventListener('click', openLogLocation);
   document.querySelector('#adb-install-area').addEventListener('drop', dropHandler, false);
   document.querySelector('#adb-install-area').addEventListener('dragover', dragOverHandler, false);
+  loadLogPathFromStore();
 });
+
+function loadLogPathFromStore() {
+  var logPath = store.get('log-path');
+  if (logPath.length > 0) {
+    console.log(logPath);
+    $('#log-tab-log-path').text(logPath);
+  }
+}
 
 // // add drag and drop events
 // document.addEventListener('drop', (event: DragEvent) => {
@@ -76,7 +87,7 @@ function getLogPath() {
 function dumpLog() {
   console.log("dumpLog");
   var sel = document.getElementById("device-list") as HTMLSelectElement;
-  var text= sel.options[sel.selectedIndex].value;
+  var text = sel.options[sel.selectedIndex].value;
 
   var today = new Date();
   var logfromTime = "";

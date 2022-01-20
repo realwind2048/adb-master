@@ -7,6 +7,8 @@
 const bootstrap = require('bootstrap');
 const $ = require('jquery');
 const { ipcRenderer } = require('electron')
+const Store = require('electron-store');
+const store = new Store();
 
 // bootstrap tab
 var triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
@@ -50,7 +52,9 @@ document.getElementById('dirs').addEventListener('click', () => {
 })
 
 ipcRenderer.on('directories-selected-message', function (event, message) {
-  console.log(message);
+  let logPath = message[0];
+  store.set('log-path', logPath);
+  console.log(logPath);
   $('#log-tab-log-path').text(message[0]);
 });
 
